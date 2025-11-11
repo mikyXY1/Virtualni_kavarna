@@ -35,17 +35,18 @@ class Kavarna:  # třída pro kavárnu
         for napoj, cena in self.nabidka.items(): # výpis nabídky z dictionary
             print(f"  - {napoj}: {cena} Kč")
         
-        vyber = input("Zadejte název nápoje: ").lower().strip()
-        
-        if vyber in self.nabidka:  # kontrola, zda je nápoj v nabídce - v dictionary
-            cena = self.nabidka[vyber]   # získání ceny z dictionary
-            print(f"\n{osoba.jmeno} si objednal(a) {vyber} za {cena} Kč.")
-            osoba.nalada = True  # nálada se zlepší po objednání
-            print(f"Nálada zákazníka {osoba.jmeno} je nyní šťastná ✓")
-            return True
-        else:
-            print(f"\nPromiňte, '{vyber}' není v nabídce. Zkuste znovu.")
-            return False
+        napoj = False   # příznak pro cyklus
+        while napoj == False:    # dokud uživatel nevybere platný nápoj
+            vyber = input("Zadejte název nápoje: ").lower().strip()
+
+            if vyber in self.nabidka:  # kontrola, zda je nápoj v nabídce - v dictionary
+                cena = self.nabidka[vyber]   # získání ceny z dictionary
+                print(f"\n{osoba.jmeno} si objednal(a) {vyber} za {cena} Kč.")
+                osoba.nalada = True  # nálada se zlepší po objednání
+                print(f"Nálada zákazníka {osoba.jmeno} je nyní šťastná ✓")
+                napoj = True
+            else:
+                print(f"\nPromiňte, '{vyber}' není v nabídce. Zkuste znovu.")
 
 def main():
     kavarna = Kavarna("Cafe Praha", "Náměstí 1, Praha")  # vytvoření instance kavárny
@@ -64,7 +65,7 @@ def main():
 
     # kavarna.objednej_napoj_od_uzivatele(Osoba("Jan", "káva", True))
     # kavarna.objednej_napoj_od_uzivatele(Osoba("Eva", "čaj", False))
-    # kavarna.objednej_napoj_od_uzivatele(Osoba("Petr", "espresso", True)) 
+    # kavarna.objednej_napoj_od_uzivatele(Osoba("Petr", "espresso", True))
 
     # Interaktivní objednání nápoje od uživatele
     print("\n--- Interaktivní objednávka ---")
